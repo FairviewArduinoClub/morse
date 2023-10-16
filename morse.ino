@@ -68,26 +68,29 @@ String morseCodes[65] = {
 };
 
 void setup() {
-    pinMode(LED_PIN, OUTPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
 
     String input = "hi";
+    int timeunit = 100;
 
     int i;
     for (i = 0; i < input.length(); i++) {
         if (input.charAt(i) == ' ') {
-            delay(2000);
+            delay(timeunit * 7);
         } else {
-            delay(1000);
+            delay(timeunit * 3);
 
             int asciiCode = (int) input.charAt(i);
             int n;
             for (n = 0; n < morseCodes[asciiCode].length(); n++) {
                 if (morseCodes[asciiCode][n] == '.') {
-                    delay(1000);
-                    digitalWrite(LED_PIN, HIGH);
+                    digitalWrite(LED_BUILTIN, HIGH);
+                    delay(timeunit);
+                    digitalWrite(LED_BUILTIN, LOW);
                 } else if (morseCodes[asciiCode][n] == '-') {
-                    delay(1000);
-                    digitalWrite(LED_PIN, HIGH);
+                    digitalWrite(LED_BUILTIN, HIGH);
+                    delay(timeunit * 3);
+                    digitalWrite(LED_BUILTIN, LOW);
                 }
             }
         }
