@@ -96,6 +96,8 @@ int morseCodes[96] = {
     112212, // 95 - _
 };
 
+int ledPin = 12;
+
 int count_digit(int number) {
    int count = 0;
    while(number != 0) {
@@ -147,14 +149,14 @@ void loop() {
                 int d = (thisMorse / power(10, n)) % 10;
                 if (d == 1) {
                     Serial.println("dit");
-                    digitalWrite(LED_BUILTIN, HIGH);
+                    digitalWrite(ledPin, HIGH);
                     delay(timeunit);
-                    digitalWrite(LED_BUILTIN, LOW);
+                    digitalWrite(ledPin, LOW);
                 } else if (d == 2) {
                     Serial.println("dah");
-                    digitalWrite(LED_BUILTIN, HIGH);
+                    digitalWrite(ledPin, HIGH);
                     delay(timeunit * 3);
-                    digitalWrite(LED_BUILTIN, LOW);
+                    digitalWrite(ledPin, LOW);
                 }
             }
         }
