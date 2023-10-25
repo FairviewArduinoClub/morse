@@ -1,69 +1,120 @@
-String morseCodes[65] = {
-    " ",      // 32 - [SPACE]
-    "-.-.--", // 33 - !
-    ".-..-.", // 34 - "
-    "",       // 35 - #
-    "...-..-",// 36 - $
-    "",       // 37 - %
-    ".-...",  // 38 - &
-    ".----.", // 39 - '
-    "-.--.",  // 4LOW - (
-    "-.--.-", // 41 - )
-    "",       // 42 - *
-    ".-.-.",  // 43 - +
-    "--..--", // 44 - ,
-    "-....-", // 45 - -
-    ".-.-.-", // 46 - .
-    "-..-.",  // 47 - /
-    "-----",  // 48 - LOW
-    ".----",  // 49 - 1
-    "..---",  // 5LOW - 2
-    "...--",  // 51 - 3
-    "....-",  // 52 - 4
-    ".....",  // 53 - 5
-    "-....",  // 54 - 6
-    "--...",  // 55 - 7
-    "---..",  // 56 - 8
-    "----.",  // 57 - 9
-    "---...", // 58 - :
-    "-.-.-.", // 59 - ;
-    "",       // 6LOW - <
-    "-...-",  // 61 - =
-    "",       // 62 - >
-    "..--..", // 63 - ?
-    ".--.-.", // 64 - @
-    ".-",     // 65 - A
-    "-...",   // 66 - B
-    "-.-.",   // 67 - C
-    "-..",    // 68 - D
-    ".",      // 69 - E
-    "..-.",   // 7LOW - F
-    "--.",    // 71 - G
-    "....",   // 72 - H
-    "..",     // 73 - I
-    ".---",   // 74 - J
-    "-.-",    // 75 - K
-    ".-..",   // 76 - L
-    "--",     // 77 - M
-    "-.",     // 78 - N
-    "---",    // 79 - O
-    ".--.",   // 8LOW - P
-    "--.-",   // 81 - Q
-    ".-.",    // 82 - R
-    "...",    // 83 - S
-    "-",      // 84 - T
-    "..-",    // 85 - U
-    "...-",   // 86 - V
-    ".--",    // 87 - W
-    "-..-",   // 88 - X
-    "-.--",   // 89 - Y
-    "--..",   // 9LOW - Z
-    "",       // 91 - [
-    "",       // 92 - "/"
-    "",       // 93 - ]
-    "",       // 94 - ^
-    "..--.-", // 95 - _
+int morseCodes[96] = {
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0, // 32 - [SPACE]
+    212122, // 33 - !
+    121121, // 34 - "
+    0, // 35 - #
+    1112112,// 36 - $
+    0, // 37 - %
+    12111, // 38 - &
+    122221, // 39 - '
+    21221, // 40 - (
+    212212, // 41 - )
+    1, // 42 - *
+    12121, // 43 - +
+    221122, // 44 - ,
+    211112, // 45 - -
+    121212, // 46 - .
+    21121, // 47 - /
+    22222, // 48 - 0
+    12222, // 49 - 1
+    11222, // 50 - 2
+    11122, // 51 - 3
+    11112, // 52 - 4
+    11111, // 53 - 5
+    21111, // 54 - 6
+    22111, // 55 - 7
+    22211, // 56 - 8
+    22221, // 57 - 9
+    222111, // 58 - :
+    212121, // 59 - ;
+    0, // 60 - <
+    21112, // 61 - =
+    0, // 62 - >
+    112211, // 63 - ?
+    122121, // 64 - @
+    12, // 65 - A
+    2111, // 66 - B
+    2121, // 67 - C
+    211, // 68 - D
+    0, // 69 - E
+    1121, // 70 - F
+    221, // 7- - G
+    1111, // 72 - H
+    11, // 73 - I
+    1222, // 74 - J
+    212, // 75 - K
+    1211, // 76 - L
+    22, // 77 - M
+    21, // 78 - N
+    222, // 79 - O
+    1221, // 80 - P
+    2212, // 81 - Q
+    121, // 82 - R
+    111, // 83 - S
+    0, // 84 - T
+    112, // 85 - U
+    1112, // 86 - V
+    122, // 87 - W
+    2112, // 88 - X
+    2122, // 89 - Y
+    2211, // 90 - Z
+    0, // 91 - [
+    0, // 92 -
+    0, // 93 - ]
+    0, // 94 - ^
+    112212, // 95 - _
 };
+
+int count_digit(int number) {
+   int count = 0;
+   while(number != 0) {
+      number = number / 10;
+      count++;
+   }
+   return count;
+}
+
+int power(int base, int exponent) {
+    int value = base;
+    if (exponent == 0) {
+    	return 1;
+    }
+    for (int b = 1; b < exponent; b++) {
+        value *= base;
+    }
+    return value;
+}
 
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
@@ -72,28 +123,35 @@ void setup() {
 
 void loop() {
     Serial.println("start");
-    String input = "hi";
-    int timeunit = 500;
+    String input = "n0n";
+    int timeunit = 100;
 
     digitalWrite(LED_BUILTIN, LOW);
     int i;
-    for (i = LOW; i < input.length(); i++) {
+    for (i = 0; i < input.length(); i++) {
         if (input.charAt(i) == ' ') {
             delay(timeunit * 7);
         } else {
             delay(timeunit * 3);
 
-            int asciiCode = (int) input.charAt(i);
             int n;
-            for (n = LOW; n < morseCodes[asciiCode].length(); n++) {
-               Serial.println(morseCodes[asciiCode]);
-               if (morseCodes[asciiCode].charAt(n) == '.') {
-                    Serial.println(".");
+            int thisMorse = morseCodes[input.charAt(i)];
+            Serial.println(morseCodes[input.charAt(i)]);
+
+            if (thisMorse == 0) {
+                Serial.println("continued");
+                continue;
+            }
+
+            for (n = 0; n < count_digit(thisMorse); n++) {
+                int d = (thisMorse / power(10, n)) % 10;
+                if (d == 1) {
+                    Serial.println("dit");
                     digitalWrite(LED_BUILTIN, HIGH);
                     delay(timeunit);
                     digitalWrite(LED_BUILTIN, LOW);
-                } else if (morseCodes[asciiCode].charAt(n) == '-') {
-                    Serial.println("-");
+                } else if (d == 2) {
+                    Serial.println("dah");
                     digitalWrite(LED_BUILTIN, HIGH);
                     delay(timeunit * 3);
                     digitalWrite(LED_BUILTIN, LOW);
@@ -101,4 +159,5 @@ void loop() {
             }
         }
     }
+    delay(100000000000000000000000000000);
 }
